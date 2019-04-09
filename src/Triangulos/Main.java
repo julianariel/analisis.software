@@ -20,6 +20,8 @@ public class Main {
 		System.out.println(l1);
 		System.out.println(l2);
 		System.out.println(l3);
+		
+		System.out.println("Probando commit");
 	}
 
 }
