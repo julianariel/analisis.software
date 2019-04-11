@@ -1,0 +1,9 @@
+Indicaciones de uso:
+
+* Para poder ejecutar correctamente el software de Gestion de Libros recuerde actualizar su version de java JRE a 1.7
+desde el site oficial https://www.java.com/en/download/
+
+Acceso
+
+* Usuario: grupo6
+* Contrasena: password

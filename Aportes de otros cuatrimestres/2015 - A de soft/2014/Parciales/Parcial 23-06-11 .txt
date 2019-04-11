@@ -1,0 +1,19 @@
+1) Dado el siguiente codigo:
+
+if(a>5) or (b>3) or (c<2)
+	x=x+1;
+else
+	x=x-1;
+
+	a) Hacer el grafico de McCabe y hallar la complejidad ciclomática
+	b) Cuántos casos de prueba son necesarios como mínimo para el método de cobertura de decisión (o sentencia ??)?
+
+2)
+	a) ¿En qué modelo de calidad está basada la norma ISO 9126?
+	b) Mencione las seis características de la norma
+
+3)
+	a) Explique las diferencias entre los métodos de caja negra y los métodos de caja blanca.
+	b) ¿A qué clasificación corresponden los "Puntos de Función"?
+
+// El otro tema era parecido, le preguntaron los principios de la prueba
