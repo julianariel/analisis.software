@@ -49,18 +49,18 @@ public class Main {
 
 	if (!triangulo.esTriangulo()) {
 	    System.out.println("No es posible armar el triangulo con esos lados.");
-	    // throw new Exception("No es posible armar el triangulo con esos lados.");
+	    return;
 	} else {
-	    System.out.println("Triángulo válido");
+	    System.out.println("TriÃ¡ngulo vÃ¡lido");
 	}
 
 	if (triangulo.esEquilatero()) {
-	    System.out.println("El triángulo es equilatero.");
+	    System.out.println("El triÃ¡ngulo es equilatero.");
 	} else {
 	    if (triangulo.esEscaleno()) {
-		System.out.println("El triángulo es escaleno.");
+		System.out.println("El triÃ¡ngulo es escaleno.");
 	    } else {
-		System.out.println("El triángulo es isóceles.");
+		System.out.println("El triÃ¡ngulo es isÃ³celes.");
 	    }
 	}
     }
