@@ -1,9 +1,0 @@
-1) Grafo de un codigo (dijo que el codigo era corto, 2 if)
- + Indicar todos los caminos posibles
- + Indicar los caminos linealmente independientes y justificar por qué los eligieron (TODOS los caminos eran 5, los linealmente independientes eran 4, pero habia uno qeu se podia cambiar por otro, pero era logicamente invalido)
- + Minimo conjunto de lotes de prueba para ese código
-
-2)
-   a) cual es el metodo de caja blanca que requiere menos ejecuciones del software
-   b) cuales son los principios de prueba de software (no su objetivo)
-   c) qué cosa miden los puntos de función

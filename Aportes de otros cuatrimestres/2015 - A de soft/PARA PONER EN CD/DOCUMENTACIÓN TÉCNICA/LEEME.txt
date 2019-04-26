@@ -1,9 +1,0 @@
-Indicaciones de uso:
-
-* Para poder ejecutar correctamente el software de Control de Paciente recuerde actualizar su version de java JRE a 1.7
-desde el site oficial https://www.java.com/en/download/
-
-Acceso
-
-* Usuario: admin	
-* Contrasena: admin
