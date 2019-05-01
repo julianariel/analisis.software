@@ -1,17 +1,14 @@
 package Triangulos;
 
 public class Triangulo {
-
 	private Integer l1;
 	private Integer l2;
 	private Integer l3;
 	
-	public boolean esTriangulo() {
-		
+	public boolean esTriangulo() {		
 		if( l1 <= 0 || l2 <= 0 || l3 <= 0) {
 			return false;
-		}
-		
+		}		
 		if (l1 + l2 <= l3 || l1 + l3 <= l2 || l2 + l3 <= l1) {
 			return false; 
 		} 
@@ -56,6 +53,5 @@ public class Triangulo {
 	}
 	public void setL3(Integer l3) {
 		this.l3 = l3;
-	}
-	
+	}	
 }

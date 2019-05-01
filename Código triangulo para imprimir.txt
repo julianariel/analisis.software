@@ -1,3 +1,71 @@
+--------------------------- Main ---------------------------
+package Triangulos;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+		Triangulo triangulo = new Triangulo();				//1
+		Scanner sc = new Scanner(System.in);				//1
+		Boolean isOk = true;						//1
+
+		do {
+			try {
+				isOk = true;					//2
+				sc = new Scanner(System.in);			//2
+				System.out.println("Ingrese el lado 1: ");	//2
+				triangulo.setL1(sc.nextInt());			//3
+			} catch (InputMismatchException e) {
+				isOk = false;					//4
+			}
+		} while (!isOk);						//5
+
+		do {
+			try {
+				isOk = true;					//6
+				sc = new Scanner(System.in);			//6
+				System.out.println("Ingrese el lado 2: ");	//6
+				triangulo.setL2(sc.nextInt());			//7
+			} catch (InputMismatchException e) {
+				isOk = false;					//8
+			}
+		} while (!isOk);						//9
+
+		do {
+			try {
+				isOk = true;					//10
+				sc = new Scanner(System.in);			//10
+				System.out.println("Ingrese el lado 3: ");	//10
+				triangulo.setL3(sc.nextInt());			//11
+			} catch (InputMismatchException e) {
+				isOk = false;					//12
+			}
+		} while (!isOk);						//13
+
+		System.out.println(triangulo.getL1() + ", " + triangulo.getL2() + ", " + triangulo.getL3()); //14
+
+		if (!triangulo.esTriangulo()) {					//15
+			System.out.println("No es posible armar el triangulo con esos lados."); //16
+			return;									//16
+		} else {
+			System.out.println("Triángulo válido");			//17
+		}
+
+		if (triangulo.esEquilatero()) {					//18
+			System.out.println("El triángulo es equilatero.");	//19
+		} else {
+			if (triangulo.esEscaleno()) {				//20
+				System.out.println("El triángulo es escaleno.");//21
+			} else {
+				System.out.println("El triángulo es isóceles.");//22
+			}
+		}
+    }
+}
+
+
+
 --------------------------- Triangulo ---------------------------
 package Triangulos;
 
@@ -7,20 +75,20 @@ public class Triangulo {
 	private Integer l3;
 	
 	public boolean esTriangulo() {		
-		if( l1 <= 0 || l2 <= 0 || l3 <= 0) {
-			return false;
+		if( l1 <= 0 || l2 <= 0 || l3 <= 0) {			//1 //2 //3
+			return false;					//4
 		}		
-		if (l1 + l2 <= l3 || l1 + l3 <= l2 || l2 + l3 <= l1) {
-			return false; 
+		if (l1 + l2 <= l3 || l1 + l3 <= l2 || l2 + l3 <= l1) {	//5 //6 //7
+			return false; 					//8
 		} 
-		return true; 
+		return true; 						//9
 	}
 	
 	public boolean esEscaleno() {
-		if(l1 != l2 && l1 != l3 && l3 != l2) {
-			return true;
+		if(l1 != l2 && l1 != l3 && l3 != l2) {			//1 //2 //3
+			return true;					//4
 		}
-		return false;
+		return false;						//5
 	}
 	
 	public boolean esEquilatero() {
@@ -55,72 +123,4 @@ public class Triangulo {
 	public void setL3(Integer l3) {
 		this.l3 = l3;
 	}	
-}
-
-
-
---------------------------- Main ---------------------------
-package Triangulos;
-
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
-public class Main {
-    public static void main(String[] args) throws Exception {
-		Triangulo triangulo = new Triangulo();
-		Scanner sc = new Scanner(System.in);
-		Boolean isOk = true;
-
-		do {
-			try {
-				isOk = true;
-				sc = new Scanner(System.in);
-				System.out.println("Ingrese el lado 1: ");
-				triangulo.setL1(sc.nextInt());
-			} catch (InputMismatchException e) {
-				isOk = false;
-			}
-		} while (!isOk);
-
-		do {
-			try {
-				isOk = true;
-				sc = new Scanner(System.in);
-				System.out.println("Ingrese el lado 2: ");
-				triangulo.setL2(sc.nextInt());
-			} catch (InputMismatchException e) {
-				isOk = false;
-			}
-		} while (!isOk);
-
-		do {
-			try {
-				isOk = true;
-				sc = new Scanner(System.in);
-				System.out.println("Ingrese el lado 3: ");
-				triangulo.setL3(sc.nextInt());
-			} catch (InputMismatchException e) {
-				isOk = false;
-			}
-		} while (!isOk);
-
-		System.out.println(triangulo.getL1() + ", " + triangulo.getL2() + ", " + triangulo.getL3());
-
-		if (!triangulo.esTriangulo()) {
-			System.out.println("No es posible armar el triangulo con esos lados.");
-			return;
-		} else {
-			System.out.println("Triángulo válido");
-		}
-
-		if (triangulo.esEquilatero()) {
-			System.out.println("El triángulo es equilatero.");
-		} else {
-			if (triangulo.esEscaleno()) {
-				System.out.println("El triángulo es escaleno.");
-			} else {
-				System.out.println("El triángulo es isóceles.");
-			}
-		}
-    }
 }
