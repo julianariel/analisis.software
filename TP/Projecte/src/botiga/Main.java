@@ -966,9 +966,29 @@ public class Main extends javax.swing.JFrame
             encontrado = Utils.buscarCliente(arrayClientes, user);
        }
        // bloque de validaciones
-       int formulario_ok = 0;
+       int formulario_ok = validateRegister(nombre, apellidos, correo, user, encontrado, password, confirm);
 
-        if(nombre.isEmpty())
+       if(formulario_ok ==1){
+           arrayClientes = Utils.insertarCliente(arrayClientes, nombre, apellidos, password, user, correo);
+           if(isAdmin)
+           {
+               mostrarUsuaris();
+           }
+           else
+           {
+               String texto = " Estimado sr/a "+nombre+" ,Le damos la bienvenida a nuestra tienda";
+               JOptionPane.showMessageDialog(new JFrame(), texto, "Los datos han sido registrados correctamente ", JOptionPane.INFORMATION_MESSAGE);
+           }
+           jdRegistro.setVisible(false);
+       }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private int validateRegister(String nombre, String apellidos, String correo, String user, int encontrado,
+			String password, String confirm) {
+    	
+    	int formulario_ok = 0;
+    	
+    	if(nombre.isEmpty())
         {
             String texto = "No has introducido tu nombre";
             String cabecera = "Error en registro ";
@@ -986,7 +1006,7 @@ public class Main extends javax.swing.JFrame
             String cabecera = "Error en registro ";
             optionPane(texto,cabecera);
         }
-        else if((!correo.contains("@"))||(!correo.contains(".")))
+        else if(validarCorreo(correo))
         {
             String texto = "Error en el formato del correo ( usuario@dominio.com )";
             String cabecera = "Error en registro ";
@@ -1017,7 +1037,7 @@ public class Main extends javax.swing.JFrame
             optionPane(texto,cabecera);
         }
 
-        else if(confirm.isEmpty() || (password.equals(confirm) == false))
+        else if(coincidenLosDosCampos(confirm, password))
         {
             String texto = "La contraseña debe coincidir en los 2 campos";
             String cabecera = "Error en registro ";
@@ -1027,23 +1047,22 @@ public class Main extends javax.swing.JFrame
         {
            formulario_ok = 1;
         }
-    
-       if(formulario_ok ==1){
-           arrayClientes = Utils.insertarCliente(arrayClientes, nombre, apellidos, password, user, correo);
-           if(isAdmin)
-           {
-               mostrarUsuaris();
-           }
-           else
-           {
-               String texto = " Estimado sr/a "+nombre+" ,Le damos la bienvenida a nuestra tienda";
-               JOptionPane.showMessageDialog(new JFrame(), texto, "Los datos han sido registrados correctamente ", JOptionPane.INFORMATION_MESSAGE);
-           }
-           jdRegistro.setVisible(false);
-       }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    	
+    	return formulario_ok;
+	}
+	private boolean coincidenLosDosCampos(String confirm, String password) {
+		if(confirm.isEmpty() || (password.equals(confirm) == false)) {
+			return true;
+		}
+		return false;
+	}
+	private boolean validarCorreo(String correo) {
+		if((!correo.contains("@"))||(!correo.contains("."))) {
+			return true;
+		}
+		return false;
+	}
+	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         jdRegistro.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
