@@ -5,6 +5,9 @@
  */
 package grupo1.gestiontesting;
 import grupo1.gestiontesting.Parser;
+import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 /**
  *
  * @author julia
@@ -12,7 +15,8 @@ import grupo1.gestiontesting.Parser;
 public class frmMain extends javax.swing.JFrame {
 
     
-    private Parser parser;
+    private final Parser parser;
+    private String FilePath;
     /**
      * Creates new form frmMain
      */
@@ -33,7 +37,7 @@ public class frmMain extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        listMethods = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
 
@@ -50,12 +54,8 @@ public class frmMain extends javax.swing.JFrame {
             }
         });
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(jList1);
+        listMethods.setName("listMethods"); // NOI18N
+        jScrollPane1.setViewportView(listMethods);
 
         jLabel1.setText("Ruta: <Seleccionar carpeta>");
 
@@ -74,15 +74,12 @@ public class frmMain extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addGap(24, 24, 24))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(56, 56, 56))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,21 +89,33 @@ public class frmMain extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(jButton2))
                 .addGap(11, 11, 11)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addGap(47, 47, 47))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        parser.Proccess();
+        
+       List<String> methods = parser.GetMethods(FilePath);
+       
+            //Crear un objeto DefaultListModel
+        DefaultListModel listModel = new DefaultListModel();
+        //Recorrer el contenido del ArrayList
+        for(int i=0; i<methods.size(); i++) {
+            //Añadir cada elemento del ArrayList en el modelo de la lista
+            listModel.add(i, methods.get(i));
+        }
+        //Asociar el modelo de lista al JList
+        listMethods.setModel(listModel);        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jFileChooser1.showOpenDialog(this);
+        FilePath = jFileChooser1.getSelectedFile().getAbsolutePath();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -149,7 +158,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JList<String> listMethods;
     // End of variables declaration//GEN-END:variables
 }

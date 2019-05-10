@@ -20,19 +20,23 @@ import java.util.logging.Logger;
  * @author julian
  */
 public class Parser {
-    public void Proccess(){
+    public List<String> GetMethods(String FilePath){
+                    List<String> methodNames = new ArrayList<>();
+
+        
         try {
-            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\TP\\Projecte\\src\\botiga\\main.java");
+            //File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\TP\\Projecte\\src\\botiga\\main.java");
+            File fitxer = new File(FilePath);
             CompilationUnit compilationUnit = StaticJavaParser.parse(fitxer);
             
-            List<String> methodNames = new ArrayList<>();
             VoidVisitor<List<String>> methodNameCollector = new MethodNameCollector();
             methodNameCollector.visit(compilationUnit, methodNames);
             methodNames.forEach(n -> System.out.println("Method Name Collected: " + n));
             
-            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         }
+                    return methodNames;            
+
     }
 }
