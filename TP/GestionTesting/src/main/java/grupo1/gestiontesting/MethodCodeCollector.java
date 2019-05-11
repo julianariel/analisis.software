@@ -6,19 +6,23 @@
 package grupo1.gestiontesting;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
  * @author julian
  */
-class MethodNameCollector extends VoidVisitorAdapter<List<MethodDeclaration>> {
+class MethodCodeCollector extends VoidVisitorAdapter<List<String>> {
 
+    
     @Override
-    public void visit(MethodDeclaration md, List<MethodDeclaration> collector) {
+    public void visit(MethodDeclaration md, List<String> collector) {
         super.visit(md, collector);
         
-        collector.add(md);
+        
+        collector.add(md.getBody().toString());
     }
  }

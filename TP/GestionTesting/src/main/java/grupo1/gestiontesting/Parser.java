@@ -7,6 +7,7 @@ package grupo1.gestiontesting;
 
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.visitor.VoidVisitor;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -20,18 +21,21 @@ import java.util.logging.Logger;
  * @author julian
  */
 public class Parser {
-    public List<String> GetMethods(String FilePath){
-                    List<String> methodNames = new ArrayList<>();
+    public List<MethodDeclaration> GetMethods(String FilePath){
+                    List<MethodDeclaration> methodNames = new ArrayList<>();
 
         
         try {
             //File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\TP\\Projecte\\src\\botiga\\main.java");
-            File fitxer = new File(FilePath);
+            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
+            //File fitxer = new File(FilePath);
             CompilationUnit compilationUnit = StaticJavaParser.parse(fitxer);
-            
-            VoidVisitor<List<String>> methodNameCollector = new MethodNameCollector();
+       
+            VoidVisitor<List<MethodDeclaration>> methodNameCollector = new MethodNameCollector();
             methodNameCollector.visit(compilationUnit, methodNames);
-            methodNames.forEach(n -> System.out.println("Method Name Collected: " + n));
+            //methodNames.forEach(n -> System.out.println("Method Name Collected: " + n.getNameAsString()));
+            
+            
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
@@ -39,4 +43,5 @@ public class Parser {
                     return methodNames;            
 
     }
+
 }
