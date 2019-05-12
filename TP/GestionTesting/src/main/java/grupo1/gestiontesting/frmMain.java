@@ -135,7 +135,7 @@ public class frmMain extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
                 
-        methods = parser.GetMethods(FilePath);
+        methods = parser.getMethods(FilePath);
         //Crear un objeto DefaultListModel
         DefaultListModel listModel = new DefaultListModel();
         //Recorrer el contenido del ArrayList
