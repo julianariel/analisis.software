@@ -27,7 +27,8 @@ public class Parser {
         
         try {
             //File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\TP\\Projecte\\src\\botiga\\main.java");
-            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
+//            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
+            File fitxer = new File("D:\\Proyectos\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
             //File fitxer = new File(FilePath);
             CompilationUnit compilationUnit = StaticJavaParser.parse(fitxer);
        

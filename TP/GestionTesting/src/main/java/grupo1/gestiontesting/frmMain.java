@@ -7,6 +7,11 @@ package grupo1.gestiontesting;
 
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.Statement;
+import com.github.javaparser.symbolsolver.resolution.SymbolSolver;
+
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
@@ -145,7 +150,19 @@ public class frmMain extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jFileChooser1.showOpenDialog(this);
         FilePath = jFileChooser1.getSelectedFile().getAbsolutePath();
-
+        File directory = new File(FilePath);
+        File[] fileArray = directory.listFiles(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String name) {
+				return name.endsWith(".java");
+			}
+		});
+        
+        List<File> fileList = Arrays.asList(fileArray);
+        
+        fileList.stream().forEach(fl -> System.out.println(fl.getName()));
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void listMethodsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMethodsValueChanged
