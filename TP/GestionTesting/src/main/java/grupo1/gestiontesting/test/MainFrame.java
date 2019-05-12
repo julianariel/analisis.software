@@ -101,7 +101,6 @@ public class MainFrame {
 		textAreaCodigo.setFont(new Font("Mongolian Baiti", Font.BOLD, 13));
 		textAreaCodigo.setBounds(10, 423, 819, 196);
 		textAreaCodigo.setEditable(false);
-		frame.getContentPane().add(textAreaCodigo);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(634, 11, 195, 401);
@@ -114,8 +113,6 @@ public class MainFrame {
 				listJavaFileValueChanged(e);
 			}
 		});
-		frame.getContentPane().add(listArchivosJava);
-		
 		
 		listClases.setBounds(10, 231, 299, 147);
 		frame.getContentPane().add(listClases);
@@ -135,7 +132,6 @@ public class MainFrame {
 				listMethodValueChanged(e);
 			}
 		});
-		frame.getContentPane().add(listMetodos);
 		
 		JLabel labelSeleccioneClase = new JLabel("Seleccione una clase de la lista:");
 		labelSeleccioneClase.setFont(new Font("Calibri", Font.BOLD, 12));
@@ -156,16 +152,16 @@ public class MainFrame {
 		frame.getContentPane().add(label_1);
 		
 		
-		scrollPaneArchivosJava.setBounds(598, 34, 19, 147);
-//		scrollPaneArchivosJava.setViewportView(listArchivosJava);
+		scrollPaneArchivosJava.setBounds(10, 34, 607, 147);
+		scrollPaneArchivosJava.setViewportView(listArchivosJava);
 		frame.getContentPane().add(scrollPaneArchivosJava);
 		
-		scrollPaneMetodos.setBounds(598, 231, 19, 147);
-//		scrollPaneMetodos.setViewportView(listMetodos);
+		scrollPaneMetodos.setBounds(319, 231, 298, 147);
+		scrollPaneMetodos.setViewportView(listMetodos);
 		frame.getContentPane().add(scrollPaneMetodos);
 		
-		scrollPaneCodigo.setBounds(810, 423, 19, 196);
-//		scrollPaneCodigo.setViewportView(textAreaCodigo);
+		scrollPaneCodigo.setBounds(10, 423, 819, 196);
+		scrollPaneCodigo.setViewportView(textAreaCodigo);
 		frame.getContentPane().add(scrollPaneCodigo);
 		elegirCarpeta.addActionListener(new ActionListener() {
 			@Override
