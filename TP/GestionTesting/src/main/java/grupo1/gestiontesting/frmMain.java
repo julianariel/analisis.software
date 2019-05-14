@@ -8,6 +8,7 @@ package grupo1.gestiontesting;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.symbolsolver.resolution.SymbolSolver;
+import com.sun.xml.internal.ws.util.StringUtils;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -46,7 +47,6 @@ public class frmMain extends javax.swing.JFrame {
     private void initComponents() {
 
         jFileChooser1 = new javax.swing.JFileChooser();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         listMethods = new javax.swing.JList<String>();
         jLabel1 = new javax.swing.JLabel();
@@ -65,21 +65,17 @@ public class frmMain extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         lblCodeLines = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        lblCodeLines1 = new javax.swing.JLabel();
         lblCodeLinescommenteds = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblCommentPerc = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lblComplejidad = new javax.swing.JLabel();
 
         jFileChooser1.setAccessory(jButton2);
         jFileChooser1.setDialogTitle("Seleccionar carpeta");
         jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButton1.setText("Procesar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         listMethods.setName("listMethods"); // NOI18N
         listMethods.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -129,9 +125,17 @@ public class frmMain extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel6.setText("Lineas de código comentadas");
 
-        lblCodeLines1.setText("000");
-
         lblCodeLinescommenteds.setText("...");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Porcentaje de lineas comentadas");
+
+        lblCommentPerc.setText("...");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Complejidad ciclomática");
+
+        lblComplejidad.setText("...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,19 +145,14 @@ public class frmMain extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
-                        .addGap(29, 29, 29))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel1)
@@ -162,19 +161,17 @@ public class frmMain extends javax.swing.JFrame {
                                 .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(151, 151, 151)
-                                .addComponent(lblCodeLines, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-                                .addComponent(jLabel5)
-                                .addGap(87, 87, 87))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(150, 150, 150)
-                                .addComponent(lblCodeLinescommenteds)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(lblCodeLinescommenteds)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel5)
+                            .addComponent(lblCodeLines, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(lblCommentPerc)
+                            .addComponent(jLabel8)
+                            .addComponent(lblComplejidad))
+                        .addGap(92, 92, 92))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,9 +193,7 @@ public class frmMain extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
-                        .addComponent(jButton1))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
@@ -206,25 +201,20 @@ public class frmMain extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
-                        .addComponent(lblCodeLinescommenteds)))
-                .addContainerGap(40, Short.MAX_VALUE))
+                        .addComponent(lblCodeLinescommenteds)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCommentPerc)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblComplejidad)))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        methods = parser.getMethods(FilePath + "\\" +  JListClasses.getSelectedValue());
-        //Crear un objeto DefaultListModel
-        DefaultListModel listModel = new DefaultListModel();
-        //Recorrer el contenido del ArrayList
-        for (int i = 0; i < methods.size(); i++) {
-            //Añadir cada elemento del ArrayList en el modelo de la lista
-            listModel.add(i, methods.get(i).getNameAsString());
-        }
-        //Asociar el modelo de lista al JList
-        listMethods.setModel(listModel);
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         jFileChooser1.setDialogTitle("Elegir carpeta");
@@ -274,12 +264,8 @@ public class frmMain extends javax.swing.JFrame {
         */
         
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void listMethodsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMethodsValueChanged
-        // TODO add your handling code here:
-        MethodDeclaration method;
-        method = methods.stream().filter(p -> p.getNameAsString().equals(listMethods.getSelectedValue())).collect(Collectors.toList()).get(0);
-        
+    
+    private void doCodeStatistics(MethodDeclaration method){
         int inicio = method.getBegin().get().line;
         int fin = method.getEnd().get().line;
         int cuenta = fin - inicio;
@@ -287,6 +273,25 @@ public class frmMain extends javax.swing.JFrame {
                         
         int cantidadDeLineasComenadas = method.getBody().get().getAllContainedComments().size();               
         lblCodeLinescommenteds.setText(String.valueOf(cantidadDeLineasComenadas));
+        
+        double commentsperc = (cantidadDeLineasComenadas * 100) / cuenta;
+        lblCommentPerc.setText(String.valueOf(commentsperc) + " %");
+        
+        int complejidad = 0;
+        for(Statement statement : method.getBody().get().getStatements())
+        {
+            //No está bien esto.
+            int ands = statement.toString().length() - statement.toString().replace("&&", "").length();
+            int ors = statement.toString().length() - statement.toString().replace("||", "").length();
+            complejidad = complejidad + ands + ors;
+        }
+        lblComplejidad.setText(String.valueOf(complejidad ));
+    }
+    
+    private void listMethodsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMethodsValueChanged
+        // TODO add your handling code here:
+        MethodDeclaration method;
+        method = methods.stream().filter(p -> p.getNameAsString().equals(listMethods.getSelectedValue())).collect(Collectors.toList()).get(0);
         
         c.setText("");
         c.append(method.getDeclarationAsString(false, false, false) + " {");
@@ -297,10 +302,22 @@ public class frmMain extends javax.swing.JFrame {
             c.append("\n");
         }
         c.append("}");
+        
+        doCodeStatistics(method);
     }//GEN-LAST:event_listMethodsValueChanged
 
     private void JListClassesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_JListClassesValueChanged
-        // TODO add your handling code here:
+                                            
+        methods = parser.getMethods(FilePath + "\\" +  JListClasses.getSelectedValue());
+        //Crear un objeto DefaultListModel
+        DefaultListModel listModel = new DefaultListModel();
+        //Recorrer el contenido del ArrayList
+        for (int i = 0; i < methods.size(); i++) {
+            //Añadir cada elemento del ArrayList en el modelo de la lista
+            listModel.add(i, methods.get(i).getNameAsString());
+        }
+        //Asociar el modelo de lista al JList
+        listMethods.setModel(listModel);
     }//GEN-LAST:event_JListClassesValueChanged
 
     /**
@@ -341,7 +358,6 @@ public class frmMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> JListClasses;
     private javax.swing.JTextArea c;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
@@ -350,6 +366,8 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -357,8 +375,9 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblCodeLines;
-    private javax.swing.JLabel lblCodeLines1;
     private javax.swing.JLabel lblCodeLinescommenteds;
+    private javax.swing.JLabel lblCommentPerc;
+    private javax.swing.JLabel lblComplejidad;
     private javax.swing.JList<String> listMethods;
     private javax.swing.JList<String> listMethods1;
     // End of variables declaration//GEN-END:variables

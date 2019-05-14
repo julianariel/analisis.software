@@ -35,7 +35,6 @@ public class Parser {
        
             VoidVisitor<List<MethodDeclaration>> methodNameCollector = new MethodNameCollector();
             methodNameCollector.visit(compilationUnit, methodNames);
-            compilationUnit.getComments().stream().forEach(fl -> System.out.println(fl.toString()));
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
