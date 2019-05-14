@@ -30,11 +30,12 @@ public class Parser {
 //            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\TP\\Projecte\\src\\botiga\\main.java");
 //            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
 //            File fitxer = new File("D:\\Proyectos\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
-        	File fitxer = new File(filePath);
+            File fitxer = new File(filePath);
             CompilationUnit compilationUnit = StaticJavaParser.parse(fitxer);
        
             VoidVisitor<List<MethodDeclaration>> methodNameCollector = new MethodNameCollector();
             methodNameCollector.visit(compilationUnit, methodNames);
+            compilationUnit.getComments().stream().forEach(fl -> System.out.println(fl.toString()));
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);

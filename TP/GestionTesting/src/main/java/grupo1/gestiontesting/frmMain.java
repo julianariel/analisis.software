@@ -11,10 +11,12 @@ import com.github.javaparser.symbolsolver.resolution.SymbolSolver;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.time.Clock;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -46,15 +48,25 @@ public class frmMain extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listMethods = new javax.swing.JList<>();
+        listMethods = new javax.swing.JList<String>();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listMethods1 = new javax.swing.JList<>();
+        listMethods1 = new javax.swing.JList<String>();
         jScrollPane3 = new javax.swing.JScrollPane();
         c = new javax.swing.JTextArea();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        JListClasses = new javax.swing.JList<String>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblCodeLines = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        lblCodeLines1 = new javax.swing.JLabel();
+        lblCodeLinescommenteds = new javax.swing.JLabel();
 
         jFileChooser1.setAccessory(jButton2);
         jFileChooser1.setDialogTitle("Seleccionar carpeta");
@@ -79,7 +91,7 @@ public class frmMain extends javax.swing.JFrame {
 
         jLabel1.setText("Ruta: <Seleccionar carpeta>");
 
-        jButton2.setText("jButton2");
+        jButton2.setText("Buscar ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -95,23 +107,74 @@ public class frmMain extends javax.swing.JFrame {
 
         jScrollPane4.setViewportView(jTextPane1);
 
+        JListClasses.setName("listMethods"); // NOI18N
+        JListClasses.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                JListClassesValueChanged(evt);
+            }
+        });
+        jScrollPane5.setViewportView(JListClasses);
+
+        jLabel2.setText("Clases");
+
+        jLabel3.setText("Métodos");
+
+        jLabel4.setText("Código");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel5.setText("Lineas de código");
+
+        lblCodeLines.setText("0000");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Lineas de código comentadas");
+
+        lblCodeLines1.setText("000");
+
+        lblCodeLinescommenteds.setText("...");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
-                .addGap(56, 56, 56))
+                        .addComponent(jLabel4)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)
+                        .addGap(29, 29, 29))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButton2))
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 719, Short.MAX_VALUE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(151, 151, 151)
+                                .addComponent(lblCodeLines, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
+                                .addComponent(jLabel5)
+                                .addGap(87, 87, 87))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(150, 150, 150)
+                                .addComponent(lblCodeLinescommenteds)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,22 +183,38 @@ public class frmMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jButton2))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(8, 8, 8)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(jButton1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCodeLines)
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblCodeLinescommenteds)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-                
-        methods = parser.getMethods(FilePath);
+        methods = parser.getMethods(FilePath + "\\" +  JListClasses.getSelectedValue());
         //Crear un objeto DefaultListModel
         DefaultListModel listModel = new DefaultListModel();
         //Recorrer el contenido del ArrayList
@@ -148,20 +227,51 @@ public class frmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        jFileChooser1.showOpenDialog(this);
+        jFileChooser1.setDialogTitle("Elegir carpeta");
+        jFileChooser1.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        
+        int result = jFileChooser1.showOpenDialog(this);
+        
+        if(result == JFileChooser.CANCEL_OPTION) {
+                FilePath = "";
+        } else if(result == JFileChooser.APPROVE_OPTION) {
+                FilePath = jFileChooser1.getSelectedFile().getAbsolutePath();
+
+                File directory = new File(FilePath);
+                File[] fileArray = directory.listFiles(new FilenameFilter() {
+                        @Override
+                        public boolean accept(File dir, String name) {
+                                return name.endsWith(".java");
+                        }
+                });
+
+                List<File> fileList = Arrays.asList(fileArray);
+        
+                fileList.stream().forEach(fl -> System.out.println(fl.getName()));
+
+                DefaultListModel listModel = new DefaultListModel();
+                for(int i=0; i < fileArray.length; i++) {
+                        String nombreArchivoJava = fileArray[i].getName();
+                        listModel.add(i, nombreArchivoJava);
+                }
+
+                JListClasses.setModel(listModel);           
+        }
+        /*
         FilePath = jFileChooser1.getSelectedFile().getAbsolutePath();
         File directory = new File(FilePath);
+        
         File[] fileArray = directory.listFiles(new FilenameFilter() {
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.endsWith(".java");
-			}
-		});
+                @Override
+                public boolean accept(File dir, String name) {
+                        return name.endsWith(".java");
+                }
+        });
         
         List<File> fileList = Arrays.asList(fileArray);
         
         fileList.stream().forEach(fl -> System.out.println(fl.getName()));
-        
+        */
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -170,17 +280,28 @@ public class frmMain extends javax.swing.JFrame {
         MethodDeclaration method;
         method = methods.stream().filter(p -> p.getNameAsString().equals(listMethods.getSelectedValue())).collect(Collectors.toList()).get(0);
         
-        //lblMethodCode.setText(method.getBody().get().getStatements().toString());
-        /*String code = ;
-        code = code.substring(1, code.length());
-        code = code.substring(0, code.length()-1).replace(",", "");*/
+        int inicio = method.getBegin().get().line;
+        int fin = method.getEnd().get().line;
+        int cuenta = fin - inicio;
+        lblCodeLines.setText(String.valueOf(cuenta));
+                        
+        int cantidadDeLineasComenadas = method.getBody().get().getAllContainedComments().size();               
+        lblCodeLinescommenteds.setText(String.valueOf(cantidadDeLineasComenadas));
+        
         c.setText("");
+        c.append(method.getDeclarationAsString(false, false, false) + " {");
+        c.append("\n");
         for(Statement statement : method.getBody().get().getStatements())
         {
-            c.append(statement.toString());
+            c.append(" " + statement.toString());
             c.append("\n");
         }
+        c.append("}");
     }//GEN-LAST:event_listMethodsValueChanged
+
+    private void JListClassesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_JListClassesValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_JListClassesValueChanged
 
     /**
      * @param args the command line arguments
@@ -218,16 +339,26 @@ public class frmMain extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> JListClasses;
     private javax.swing.JTextArea c;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JLabel lblCodeLines;
+    private javax.swing.JLabel lblCodeLines1;
+    private javax.swing.JLabel lblCodeLinescommenteds;
     private javax.swing.JList<String> listMethods;
     private javax.swing.JList<String> listMethods1;
     // End of variables declaration//GEN-END:variables

@@ -1,14 +1,15 @@
-package Triangulos;
+﻿package Triangulos;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+//coment 1
 		Triangulo triangulo = new Triangulo();
 		Scanner sc = new Scanner(System.in);
 		Boolean isOk = true;
-
+//comment 2
 		do {
 			try {
 				isOk = true;

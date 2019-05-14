@@ -22,19 +22,19 @@ import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
-import net.miginfocom.swing.MigLayout;
+//import net.miginfocom.swing.MigLayout;
 import javax.swing.SpringLayout;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.JList;
-import com.jgoodies.forms.layout.FormLayout;
+//import com.jgoodies.forms.layout.FormLayout;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.Statement;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
+//import com.jgoodies.forms.layout.ColumnSpec;
+//import com.jgoodies.forms.layout.FormSpecs;
+//import com.jgoodies.forms.layout.RowSpec;
 
 import grupo1.gestiontesting.Parser;
 
@@ -205,19 +205,19 @@ public class MainFrame {
 			filePath = fileChooser.getSelectedFile().getAbsolutePath();
 			
 			File directory = new File(filePath);
-	        fileArray = directory.listFiles(new FilenameFilter() {
+                        fileArray = directory.listFiles(new FilenameFilter() {
 				@Override
 				public boolean accept(File dir, String name) {
 					return name.endsWith(".java");
 				}
 			});
 	        
-	        for(int i=0; i < fileArray.length; i++) {
-	        	String nombreArchivoJava = fileArray[i].getName();
-	        	listModelArchivos.add(i, nombreArchivoJava);
-	        }
-	        
-	        listArchivosJava.setModel(listModelArchivos);
+                    for(int i=0; i < fileArray.length; i++) {
+                            String nombreArchivoJava = fileArray[i].getName();
+                            listModelArchivos.add(i, nombreArchivoJava);
+                    }
+
+                    listArchivosJava.setModel(listModelArchivos);
 	        
 		}
 	}
