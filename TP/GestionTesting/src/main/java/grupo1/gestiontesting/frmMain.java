@@ -8,7 +8,7 @@ package grupo1.gestiontesting;
 import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.symbolsolver.resolution.SymbolSolver;
-import com.sun.xml.internal.ws.util.StringUtils;
+//import com.sun.xml.internal.ws.util.StringUtils;
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -56,8 +56,7 @@ public class frmMain extends javax.swing.JFrame {
         // which returns Toolkit object. This object contains getImage()
         // method which takes the path of the image and returns the
         // java.awt.Image object
-        setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
-        
+        setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));        
     }
 
     /**
