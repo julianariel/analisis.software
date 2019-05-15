@@ -9,15 +9,20 @@ import com.github.javaparser.ast.body.MethodDeclaration;
 import com.github.javaparser.ast.stmt.Statement;
 import com.github.javaparser.symbolsolver.resolution.SymbolSolver;
 import com.sun.xml.internal.ws.util.StringUtils;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 /**
@@ -30,14 +35,29 @@ public class frmMain extends javax.swing.JFrame {
     private String FilePath;
     private List<MethodDeclaration> methods;    
     private List<MethodDeclaration> allMethods;
+    private HashMap<String, Integer> fadeIn = new HashMap<String, Integer>();;
 
-
+    //Para evitar que se elija lo mismo 2 veces porque anda lentito.
+    private String methodElegido = "";
+    private String claseElegida = "";
     /**
      * Creates new form frmMain
      */
     public frmMain() {
         initComponents();
         parser = new Parser();
+        /*
+        ImageIcon ImageIcon = new ImageIcon(getClass().getResource("../../../../../icon.png"));
+        Image Image = ImageIcon.getImage();
+        this.setIconImage(Image);
+        */
+        // First way, using Toolkit
+        // The Toolkit class contains a factory method getDefaulToolkit()
+        // which returns Toolkit object. This object contains getImage()
+        // method which takes the path of the image and returns the
+        // java.awt.Image object
+        setIconImage(Toolkit.getDefaultToolkit().getImage("icon.png"));
+        
     }
 
     /**
@@ -52,7 +72,7 @@ public class frmMain extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         listMethods = new javax.swing.JList<String>();
-        jLabel1 = new javax.swing.JLabel();
+        lblPath = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listMethods1 = new javax.swing.JList<String>();
@@ -87,6 +107,7 @@ public class frmMain extends javax.swing.JFrame {
         jFileChooser1.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Herramienta de testing");
 
         listMethods.setName("listMethods"); // NOI18N
         listMethods.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -96,7 +117,7 @@ public class frmMain extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listMethods);
 
-        jLabel1.setText("Ruta: <Seleccionar carpeta>");
+        lblPath.setText("Ruta: <Seleccionar carpeta>");
 
         jButton2.setText("Buscar ");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -177,7 +198,7 @@ public class frmMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(jLabel1)
+                            .addComponent(lblPath)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton2))
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,7 +239,7 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(lblPath)
                     .addComponent(jButton2))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -286,7 +307,8 @@ public class frmMain extends javax.swing.JFrame {
                 FilePath = "";
         } else if(result == JFileChooser.APPROVE_OPTION) {
                 FilePath = jFileChooser1.getSelectedFile().getAbsolutePath();
-
+                lblPath.setText("Ruta: " + FilePath);
+                
                 File directory = new File(FilePath);
                 File[] fileArray = directory.listFiles(new FilenameFilter() {
                         @Override
@@ -310,6 +332,28 @@ public class frmMain extends javax.swing.JFrame {
                 allMethods = new ArrayList<MethodDeclaration>();
                 for(int i = 0; i< JListClasses.getModel().getSize();i++){
                     allMethods.addAll(parser.getMethods(FilePath + "\\" +  JListClasses.getModel().getElementAt(i)));
+                }
+                
+                for(MethodDeclaration auxMethod : allMethods){
+                    FanIn fo = new FanIn();
+                    String auxPrimeraLinea = auxMethod.getDeclarationAsString(true, false, false) + " {";
+
+                    fo.analizarLinea(auxPrimeraLinea);
+
+                    for(Statement statement : auxMethod.getBody().get().getStatements()) {
+                        String multilinea_linea = statement.toString();
+                        for(String linea : multilinea_linea.split("\n")){
+                            fo.analizarLinea(linea);
+                        }
+                    }
+
+                    for(String methodsCalled : fo.getLista()) {
+                        if(fadeIn.containsKey(methodsCalled)){
+                            fadeIn.replace(methodsCalled, this.fadeIn.get(methodsCalled) + 1);
+                        } else {
+                            fadeIn.put(methodsCalled, 1);
+                        }
+                    }
                 }
         }        
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -336,8 +380,7 @@ public class frmMain extends javax.swing.JFrame {
         h.analizarLinea(primeraLinea);
         fi.analizarLinea(primeraLinea);
         
-        for(Statement statement : method.getBody().get().getStatements())
-        {
+        for(Statement statement : method.getBody().get().getStatements()) {
             String multilinea_linea = statement.toString();
             for(String linea : multilinea_linea.split("\n")){
                 cc.analizarLinea(linea);
@@ -355,29 +398,11 @@ public class frmMain extends javax.swing.JFrame {
         int volumen = h.getVolumen();
         lblVolumen.setText(String.valueOf(volumen ));
         
-        int fadeIn = 0;
-        for(MethodDeclaration auxMethod : allMethods){
-            if(!auxMethod.getNameAsString().equals(method.getNameAsString())){
-                FanIn fo = new FanIn();
-                String auxPrimeraLinea = auxMethod.getDeclarationAsString(true, false, false) + " {";
-        
-                fo.analizarLinea(auxPrimeraLinea);
-
-                for(Statement statement : auxMethod.getBody().get().getStatements()) {
-                    String multilinea_linea = statement.toString();
-                    for(String linea : multilinea_linea.split("\n")){
-                        fo.analizarLinea(linea);
-                    }
-                }
-                
-                for(String methodsCalled : fo.getLista()) {
-                    if(methodsCalled.equals(method.getNameAsString())) {
-                        fadeIn = fadeIn +1 ;
-                    }
-                }
-            }
-        }
-        lblFanIn.setText(String.valueOf(fadeIn));
+        String methodName = method.getNameAsString();
+        int intFadeIn = 0;        
+        if(fadeIn.containsKey(methodName))
+            intFadeIn = fadeIn.get(methodName);
+        lblFanIn.setText(String.valueOf(intFadeIn));
         
         int fadeOut = fi.getLista().size();
         lblFanOut.setText(String.valueOf(fadeOut));	
@@ -385,34 +410,42 @@ public class frmMain extends javax.swing.JFrame {
     
     private void listMethodsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listMethodsValueChanged
         // TODO add your handling code here:
-        MethodDeclaration method;
-        method = methods.stream().filter(p -> p.getNameAsString().equals(listMethods.getSelectedValue())).collect(Collectors.toList()).get(0);
-        
-        c.setText("");
-        c.append(method.getDeclarationAsString(true, false, false) + " {");
-        c.append("\n");
-        for(Statement statement : method.getBody().get().getStatements())
-        {
-            c.append(" " + statement.toString());
+        if(listMethods.getSelectedIndex() > -1 && !methodElegido.equals(listMethods.getSelectedValue())){
+            methodElegido = listMethods.getSelectedValue();
+            System.out.println("Método elegido: " + methodElegido);
+            
+            MethodDeclaration method;
+            method = methods.stream().filter(p -> p.getNameAsString().equals(listMethods.getSelectedValue())).collect(Collectors.toList()).get(0);
+
+            c.setText("");
+            c.append(method.getDeclarationAsString(true, false, false) + " {");
             c.append("\n");
+            for(Statement statement : method.getBody().get().getStatements())
+            {
+                c.append(" " + statement.toString());
+                c.append("\n");
+            }
+            c.append("}");
+
+            doCodeStatistics(method);
         }
-        c.append("}");
-        
-        doCodeStatistics(method);
     }//GEN-LAST:event_listMethodsValueChanged
 
     private void JListClassesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_JListClassesValueChanged
-                                            
-        methods = parser.getMethods(FilePath + "\\" +  JListClasses.getSelectedValue());
-        //Crear un objeto DefaultListModel
-        DefaultListModel listModel = new DefaultListModel();
-        //Recorrer el contenido del ArrayList
-        for (int i = 0; i < methods.size(); i++) {
-            //Añadir cada elemento del ArrayList en el modelo de la lista
-            listModel.add(i, methods.get(i).getNameAsString());
+        if(JListClasses.getSelectedIndex() > -1 && !claseElegida.equals(JListClasses.getSelectedValue())) {
+            claseElegida = JListClasses.getSelectedValue();
+            System.out.println("Clase elegida: " + claseElegida);                     
+            methods = parser.getMethods(FilePath + "\\" +  JListClasses.getSelectedValue());
+            //Crear un objeto DefaultListModel
+            DefaultListModel listModel = new DefaultListModel();
+            //Recorrer el contenido del ArrayList
+            for (int i = 0; i < methods.size(); i++) {
+                //Añadir cada elemento del ArrayList en el modelo de la lista
+                listModel.add(i, methods.get(i).getNameAsString());
+            }
+            //Asociar el modelo de lista al JList
+            listMethods.setModel(listModel);
         }
-        //Asociar el modelo de lista al JList
-        listMethods.setModel(listModel);
     }//GEN-LAST:event_JListClassesValueChanged
 
     /**
@@ -455,7 +488,6 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JTextArea c;
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -480,6 +512,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JLabel lblFanIn;
     private javax.swing.JLabel lblFanOut;
     private javax.swing.JLabel lblLongitud;
+    private javax.swing.JLabel lblPath;
     private javax.swing.JLabel lblVolumen;
     private javax.swing.JList<String> listMethods;
     private javax.swing.JList<String> listMethods1;
