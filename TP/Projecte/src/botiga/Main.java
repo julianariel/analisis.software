@@ -966,7 +966,7 @@ public class Main extends javax.swing.JFrame
             encontrado = Utils.buscarCliente(arrayClientes, user);
        }
        // bloque de validaciones
-       int formulario_ok = validateRegister(nombre, apellidos, correo, user, encontrado, password, confirm);
+       int formulario_ok = validatarRegistro(nombre, apellidos, correo, user, encontrado, password, confirm);
 
        if(formulario_ok ==1){
            arrayClientes = Utils.insertarCliente(arrayClientes, nombre, apellidos, password, user, correo);
@@ -983,7 +983,7 @@ public class Main extends javax.swing.JFrame
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private int validateRegister(String nombre, String apellidos, String correo, String user, int encontrado,
+    private int validatarRegistro(String nombre, String apellidos, String correo, String user, int encontrado,
 			String password, String confirm) {
     	
     	int formulario_ok = 0;
