@@ -39,6 +39,11 @@ class FanIn {
 	}
 	
 	public void analizarLinea(String linea) {
+		if(linea.startsWith("//")){
+			enComentario = true;
+		} else {
+			enComentario = false
+		}
 		if (!enComentario) {	
 			if (enFuncion) {
 				if (!sinLlave) {
