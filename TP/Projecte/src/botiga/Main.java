@@ -336,7 +336,7 @@ public class Main extends javax.swing.JFrame
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                altaProducto(evt);
             }
         });
 
@@ -1134,7 +1134,7 @@ public class Main extends javax.swing.JFrame
         // TODO add your handling code here:
 }//GEN-LAST:event_jtprecioActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void altaProducto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
        String producto = jtnombre.getText();
        String precio =jtprecio.getText();
        String descripcion= jtdescripcion.getText();
