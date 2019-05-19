@@ -42,7 +42,7 @@ class FanIn {
 		if(linea.startsWith("//")){
 			enComentario = true;
 		} else {
-			enComentario = false
+			enComentario = false;
 		}
 		if (!enComentario) {	
 			if (enFuncion) {
