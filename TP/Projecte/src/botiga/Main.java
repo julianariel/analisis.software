@@ -336,7 +336,7 @@ public class Main extends javax.swing.JFrame
         btnAgregar.setText("Agregar");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                altaProducto(evt);
             }
         });
 
@@ -966,7 +966,7 @@ public class Main extends javax.swing.JFrame
             encontrado = Utils.buscarCliente(arrayClientes, user);
        }
        // bloque de validaciones
-       int formulario_ok = validateRegister(nombre, apellidos, correo, user, encontrado, password, confirm);
+       int formulario_ok = validarRegistro(nombre, apellidos, correo, user, encontrado, password, confirm);
 
        if(formulario_ok ==1){
            arrayClientes = Utils.insertarCliente(arrayClientes, nombre, apellidos, password, user, correo);
@@ -983,7 +983,7 @@ public class Main extends javax.swing.JFrame
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private int validateRegister(String nombre, String apellidos, String correo, String user, int encontrado,
+    private int validarRegistro(String nombre, String apellidos, String correo, String user, int encontrado,
 			String password, String confirm) {
     	
     	int formulario_ok = 0;
@@ -1134,7 +1134,7 @@ public class Main extends javax.swing.JFrame
         // TODO add your handling code here:
 }//GEN-LAST:event_jtprecioActionPerformed
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+    private void altaProducto(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
        String producto = jtnombre.getText();
        String precio =jtprecio.getText();
        String descripcion= jtdescripcion.getText();

@@ -21,27 +21,26 @@ import java.util.logging.Logger;
  * @author julian
  */
 public class Parser {
-    public List<MethodDeclaration> GetMethods(String FilePath){
-                    List<MethodDeclaration> methodNames = new ArrayList<>();
-
+	
+    public List<MethodDeclaration> getMethods(String filePath){
         
+    	List<MethodDeclaration> methodNames = new ArrayList<>();
+
         try {
-            //File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\TP\\Projecte\\src\\botiga\\main.java");
-            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
-            //File fitxer = new File(FilePath);
+//            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\TP\\Projecte\\src\\botiga\\main.java");
+//            File fitxer = new File("D:\\UNLaM\\Analisis de Software\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
+//            File fitxer = new File("D:\\Proyectos\\analisis.software\\Triangulo\\src\\Triangulos\\Triangulo.java");
+            File fitxer = new File(filePath);
             CompilationUnit compilationUnit = StaticJavaParser.parse(fitxer);
        
             VoidVisitor<List<MethodDeclaration>> methodNameCollector = new MethodNameCollector();
             methodNameCollector.visit(compilationUnit, methodNames);
-            //methodNames.forEach(n -> System.out.println("Method Name Collected: " + n.getNameAsString()));
-            
-            
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
         }
-                    return methodNames;            
-
+       
+        return methodNames;            
     }
 
 }
