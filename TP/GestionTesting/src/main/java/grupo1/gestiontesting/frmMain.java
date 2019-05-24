@@ -375,6 +375,9 @@ public class frmMain extends javax.swing.JFrame {
         
         String primeraLinea = method.getDeclarationAsString(true, false, false) + " {";
         
+        c.setText("");
+        c.append(primeraLinea + "\n");
+            
         cc.analizarLinea(primeraLinea);
         h.analizarLinea(primeraLinea);
         fi.analizarLinea(primeraLinea);
@@ -386,7 +389,9 @@ public class frmMain extends javax.swing.JFrame {
                 h.analizarLinea(linea);                
                 fi.analizarLinea(linea);
             }
+            c.append(" " + multilinea_linea + "\n");
         }
+        c.append("}");
         
         int complejidad = cc.getComplejidadTotal();
         lblComplejidad.setText(String.valueOf(complejidad ));
@@ -415,16 +420,6 @@ public class frmMain extends javax.swing.JFrame {
             
             MethodDeclaration method;
             method = methods.stream().filter(p -> p.getNameAsString().equals(listMethods.getSelectedValue())).collect(Collectors.toList()).get(0);
-
-            c.setText("");
-            c.append(method.getDeclarationAsString(true, false, false) + " {");
-            c.append("\n");
-            for(Statement statement : method.getBody().get().getStatements())
-            {
-                c.append(" " + statement.toString());
-                c.append("\n");
-            }
-            c.append("}");
 
             doCodeStatistics(method);
         }
