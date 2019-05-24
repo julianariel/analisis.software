@@ -14,9 +14,11 @@ import java.awt.Toolkit;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.text.DecimalFormat;
 import java.time.Clock;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +42,7 @@ public class frmMain extends javax.swing.JFrame {
     //Para evitar que se elija lo mismo 2 veces porque anda lentito.
     private String methodElegido = "";
     private String claseElegida = "";
+    private static final Boolean LOG_DEBUG = false;
     /**
      * Creates new form frmMain
      */
@@ -100,6 +103,15 @@ public class frmMain extends javax.swing.JFrame {
         lblFanOut = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         lblFanIn = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jSeparator2 = new javax.swing.JSeparator();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        jSeparator8 = new javax.swing.JSeparator();
 
         jFileChooser1.setAccessory(jButton2);
         jFileChooser1.setDialogTitle("Seleccionar carpeta");
@@ -149,44 +161,54 @@ public class frmMain extends javax.swing.JFrame {
         jLabel4.setText("Código");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Lineas de código");
+        jLabel5.setText("Cantidad de lineas de código totales");
 
+        lblCodeLines.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCodeLines.setText("...");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Lineas de código comentadas");
+        jLabel6.setText("Cantidad de lineas de código comentadas");
 
+        lblCodeLinescommenteds.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCodeLinescommenteds.setText("...");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Porcentaje de lineas comentadas");
 
+        lblCommentPerc.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblCommentPerc.setText("...");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("Volumen");
 
+        lblComplejidad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblComplejidad.setText("...");
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel9.setText("Complejidad ciclomática");
 
+        lblLongitud.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblLongitud.setText("...");
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel10.setText("Longitud");
 
+        lblVolumen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblVolumen.setText("...");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel11.setText("Fan-Out");
 
+        lblFanOut.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFanOut.setText("...");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel12.setText("Fan-In");
 
+        lblFanIn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblFanIn.setText("...");
+
+        jLabel1.setText("((cantidad de lineas comentadas * 100) / cantiad de lineas totales)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,43 +217,80 @@ public class frmMain extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(lblPath)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2))
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(lblCodeLinescommenteds)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel5)
-                    .addComponent(lblCodeLines)
-                    .addComponent(jLabel6)
-                    .addComponent(lblCommentPerc)
-                    .addComponent(jLabel8)
-                    .addComponent(lblComplejidad)
-                    .addComponent(lblLongitud)
-                    .addComponent(lblVolumen)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(lblFanOut)
-                    .addComponent(jLabel12)
-                    .addComponent(lblFanIn)
-                    .addComponent(jLabel9))
-                .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jButton2)
+                                        .addGap(19, 19, 19))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(41, 41, 41)
+                                                .addComponent(jLabel3))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 697, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblVolumen))
+                            .addComponent(jSeparator1)
+                            .addComponent(jSeparator2)
+                            .addComponent(jSeparator3)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator6, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblFanIn))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblFanOut))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblCodeLines))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                .addComponent(lblCodeLinescommenteds))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblCommentPerc))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblComplejidad))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblLongitud))
+                            .addComponent(jSeparator8)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblPath)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,56 +299,75 @@ public class frmMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPath)
                     .addComponent(jButton2))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(jLabel2)
-                        .addGap(7, 7, 7))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(11, 11, 11))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel5)
+                                            .addComponent(lblCodeLines))
+                                        .addGap(15, 15, 15)
+                                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel6)
+                                            .addComponent(lblCodeLinescommenteds))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(4, 4, 4)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
+                        .addGap(158, 158, 158)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(lblCommentPerc))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCodeLines)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(lblComplejidad))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCodeLinescommenteds)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(lblLongitud))
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblCommentPerc)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(lblVolumen))
+                        .addGap(17, 17, 17)
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblComplejidad)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(lblFanOut))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblLongitud)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblVolumen)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblFanOut)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblFanIn)))
+                        .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(lblFanIn))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -308,6 +386,9 @@ public class frmMain extends javax.swing.JFrame {
                 FilePath = jFileChooser1.getSelectedFile().getAbsolutePath();
                 lblPath.setText("Ruta: " + FilePath);
                 
+                
+                this.log("se cerró el file chooser");
+                                
                 File directory = new File(FilePath);
                 File[] fileArray = directory.listFiles(new FilenameFilter() {
                         @Override
@@ -315,27 +396,36 @@ public class frmMain extends javax.swing.JFrame {
                                 return name.endsWith(".java");
                         }
                 });
+                
+                this.log("files leidos");
 
                 List<File> fileList = Arrays.asList(fileArray);
         
-                fileList.stream().forEach(fl -> System.out.println(fl.getName()));
-
                 DefaultListModel listModel = new DefaultListModel();
                 for(int i=0; i < fileArray.length; i++) {
                         String nombreArchivoJava = fileArray[i].getName();
                         listModel.add(i, nombreArchivoJava);
                 }
 
-                JListClasses.setModel(listModel);    
+                JListClasses.setModel(listModel);   
+                
+                this.log("files agregadeos a la lista"); 
                 
                 allMethods = new ArrayList<MethodDeclaration>();
                 for(int i = 0; i< JListClasses.getModel().getSize();i++){
                     allMethods.addAll(parser.getMethods(FilePath + "\\" +  JListClasses.getModel().getElementAt(i)));
                 }
                 
-                for(MethodDeclaration auxMethod : allMethods){
+                this.log("métodos cargados");
+                
+                for(MethodDeclaration auxMethod : allMethods){    
+                    if(auxMethod.getNameAsString().contains("initComponents")){
+                        continue;
+                    }
                     FanIn fo = new FanIn();
                     String auxPrimeraLinea = auxMethod.getDeclarationAsString(true, false, false) + " {";
+                                               
+                    this.log("inicia fan in de: " + auxPrimeraLinea);
 
                     fo.analizarLinea(auxPrimeraLinea);
 
@@ -353,21 +443,35 @@ public class frmMain extends javax.swing.JFrame {
                             fadeIn.put(methodsCalled, 1);
                         }
                     }
+                    this.log("termina fan in de: " + auxPrimeraLinea);
                 }
+                this.log("fan in calculado");
         }        
     }//GEN-LAST:event_jButton2ActionPerformed
+    
+    private void log(String message){
+        if(LOG_DEBUG){
+            System.out.println(new Date().toString() + " - " + message);
+        }        
+    }
     
     private void doCodeStatistics(MethodDeclaration method){
         int inicio = method.getBegin().get().line;
         int fin = method.getEnd().get().line;
         int cuenta = fin - inicio;
-        lblCodeLines.setText(String.valueOf(cuenta + 1));
+        cuenta = cuenta + 1;
+        lblCodeLines.setText(String.valueOf(cuenta));
                         
         int cantidadDeLineasComenadas = method.getBody().get().getAllContainedComments().size();               
         lblCodeLinescommenteds.setText(String.valueOf(cantidadDeLineasComenadas));
         
-        double commentsperc = (cantidadDeLineasComenadas * 100) / cuenta;
-        lblCommentPerc.setText(String.valueOf(commentsperc) + " %");
+        double commentsperc = (Math.round((double)cantidadDeLineasComenadas * 100) / (double)cuenta);
+        if(commentsperc > 0){
+            DecimalFormat f = new DecimalFormat("##.00");
+            lblCommentPerc.setText(f.format(commentsperc) + " %");
+        } else {
+            lblCommentPerc.setText("0.00 %");
+        }
         
         ComplejidadCiclomatica cc = new ComplejidadCiclomatica();
         Halstead h = new Halstead();
@@ -433,9 +537,12 @@ public class frmMain extends javax.swing.JFrame {
             //Crear un objeto DefaultListModel
             DefaultListModel listModel = new DefaultListModel();
             //Recorrer el contenido del ArrayList
-            for (int i = 0; i < methods.size(); i++) {
+            for (int i = 0; i < methods.size(); i++) {                          
+                if(methods.get(i).getNameAsString().contains("initComponents")){
+                    continue;
+                }
                 //Añadir cada elemento del ArrayList en el modelo de la lista
-                listModel.add(i, methods.get(i).getNameAsString());
+                listModel.addElement(methods.get(i).getNameAsString());
             }
             //Asociar el modelo de lista al JList
             listMethods.setModel(listModel);
@@ -482,6 +589,7 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JTextArea c;
     private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -498,6 +606,14 @@ public class frmMain extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblCodeLines;
     private javax.swing.JLabel lblCodeLinescommenteds;
