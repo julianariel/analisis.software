@@ -37,6 +37,11 @@ public class ComplejidadCiclomatica {
 	private Pattern patronComplejidad = Pattern.compile("([/][*].*[*][/]|[/][*].*|.*[*][/]|[/][/].+)|while|if|switch|case|for|[|]+|&&");
 	
 	public void analizarLinea(String linea) {
+		if(linea.startsWith("//")){
+			enComentario = true;
+		} else {
+			enComentario = false;
+		}
 		if (!enComentario) {	
 			if (enFuncion) {
 				if (!sinLlave) {

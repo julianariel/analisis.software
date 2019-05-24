@@ -41,6 +41,11 @@ class Halstead {
 	}
 	
 	public void analizarLinea(String linea) {
+		if(linea.startsWith("//")){
+			enComentario = true;
+		} else {
+			enComentario = false;
+		}
 		if (!this.cabeceraMetodo) {
 			if (linea.contains("/*")) {
 				enComentario = true;
