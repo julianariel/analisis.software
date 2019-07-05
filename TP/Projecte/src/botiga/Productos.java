@@ -10,8 +10,13 @@ import java.io.Serializable;
 
 
 public class Productos implements Serializable {
- private String Nombre = "";
-   private String Descripcion = "";
+ /**
+	 * 
+	 */
+	private static final long serialVersionUID = -1291716945702748336L;
+	
+	private String Nombre = "";
+	private String Descripcion = "";
     private int Precio= 0;
 
     public Productos()

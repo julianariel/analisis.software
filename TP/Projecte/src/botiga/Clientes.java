@@ -12,7 +12,12 @@ import java.io.Serializable;
 
 public class Clientes implements Serializable
 {
-    private String Nombre = "";
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8882871584369387883L;
+	
+	private String Nombre = "";
     private String Apellidos = "";
     private String UserName = "";
     private int Admin = 0;
