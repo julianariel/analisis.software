@@ -34,7 +34,7 @@ public class ComplejidadCiclomatica {
 	}
 	
 	private Pattern patronFuncion = Pattern.compile("((public|private|protected|static|final|native|synchronized|abstract|transient)+\\s)+[\\$_\\w\\<\\>\\[\\]]*\\s+[\\$_\\w]+\\([^\\)]*\\)?\\s*\\{?[^\\}]*\\}?");
-	private Pattern patronComplejidad = Pattern.compile("([/][*].*[*][/]|[/][*].*|.*[*][/]|[/][/].+)|while|if|switch|case|for|[|]+|&&");
+	private Pattern patronComplejidad = Pattern.compile("([/][*].*[*][/]|[/][*].*|.*[*][/]|[/][/].+)|while |while\\(|if |if\\(|switch |switch\\(|case |case:|for |for\\(|[|]+|&&");
 	
 	public void analizarLinea(String linea) {
 		if(linea.startsWith("//")){
